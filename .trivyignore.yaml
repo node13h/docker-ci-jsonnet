@@ -1,0 +1,5 @@
+misconfigurations:
+  # No need for HEALTHCHECK.
+  - id: AVD-DS-0026
+  # Allow root user.
+  - id: AVD-DS-0002
