@@ -10,4 +10,4 @@ Tools included:
 - Git
 
 See [DEVELOPING.md](DEVELOPING.md) for local development setup
-instructions using Podman.
+instructions.
