@@ -7,6 +7,7 @@ Tools included:
 - yq
 - Bash
 - Make
+- Git
 
 See [DEVELOPING-podman.md](DEVELOPING-podman.md) for local development setup
 instructions using Podman.
