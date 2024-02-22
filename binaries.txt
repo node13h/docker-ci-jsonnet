@@ -1,4 +1,4 @@
 jb-0.5.1-linux-amd64 f5bccc94d28fbbe8ad1d46fd4f208619e45d368a5d7924f6335f4ecfa0605c85 https://github.com/jsonnet-bundler/jsonnet-bundler/releases/download/v0.5.1/jb-linux-amd64
 jb-0.5.1-linux-arm64 d42fc72004721617a54fc38fa25c0c8f381b94927b47a8d87cfcd47fa3f16acf https://github.com/jsonnet-bundler/jsonnet-bundler/releases/download/v0.5.1/jb-linux-arm64
 go-jsonnet-0.20.0-linux-amd64.tar.gz a137c5e969609c3995c4d05817a247cfef8a92760c5306c3ad7df0355dd62970 https://github.com/google/go-jsonnet/releases/download/v0.20.0/go-jsonnet_0.20.0_Linux_x86_64.tar.gz
-go-jsonnet-linux-0.20.0-arm64.tar.gz 49fbc99c91dcd2be53fa856307de3b8708c91dc5c74740714fdf9317957322e0 https://github.com/google/go-jsonnet/releases/download/v0.20.0/go-jsonnet_0.20.0_Linux_arm64.tar.gz
+go-jsonnet-0.20.0-linux-arm64.tar.gz 49fbc99c91dcd2be53fa856307de3b8708c91dc5c74740714fdf9317957322e0 https://github.com/google/go-jsonnet/releases/download/v0.20.0/go-jsonnet_0.20.0_Linux_arm64.tar.gz
