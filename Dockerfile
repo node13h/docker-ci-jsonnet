@@ -26,7 +26,7 @@ ARG GIT_COMMIT_SHA
 # Upgrade here for now, will move into a base image later.
 RUN apt-get update \
     && apt-get upgrade -y \
-    && apt-get install -y --no-install-recommends jq yq bash make git \
+    && apt-get install -y --no-install-recommends jq yq bash make git ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=download --chown=root:root --chmod=0755 [ \
