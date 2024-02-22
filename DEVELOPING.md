@@ -1,23 +1,23 @@
 ## Setting up a local development environment
 
-Local development has been tested on Fedora 39 with Podman as the container
-executable. Root privileges are not needed for running local builds.
+Setup instructions should work for both Docker and (rootless)
+Podman (tested on Fedora 39 with Podman 4.9.0).
 
 ### Install prerequisites
 
 - [gitlab-ci-local](https://github.com/firecow/gitlab-ci-local).
-- Podman
+- Podman or Docker
 - GNU Make
 - `qemu-user-static` to enable cros-platform builds.
 
 ### Set up a container network for builds
 
-To run CI jobs locally, a Podman network with DNS for container names enabled
+To run CI jobs locally, a container network with DNS for container names enabled
 is necessary. The default network has it disabled, so not suitable.
 To create a new network named `localci` run
 
 ```shell
-podman network create localci
+docker network create localci
 ```
 
 ### Set up a local container registry
@@ -26,7 +26,7 @@ Container builds need a registry to store and pass built images between jobs.
 To start a local registry container named `localci-registry` in background run
 
 ```
-podman run -d --restart=on-failure -p 5000:5000 --name localci-registry --network localci \
+docker run -d --restart=on-failure -p 5000:5000 --name localci-registry --network localci \
     docker.io/library/registry:2
 ```
 

@@ -1,4 +1,4 @@
-CONTAINER_EXECUTABLE := podman
+CONTAINER_EXECUTABLE ?= docker
 CONTAINER_NETWORK := localci
 GIT_TAG = $(shell git tag --points-at HEAD | { grep '^v[[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]' || test $? = 1; })
 

@@ -9,5 +9,5 @@ Tools included:
 - Make
 - Git
 
-See [DEVELOPING-podman.md](DEVELOPING-podman.md) for local development setup
+See [DEVELOPING.md](DEVELOPING.md) for local development setup
 instructions using Podman.
