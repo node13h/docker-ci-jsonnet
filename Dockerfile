@@ -10,7 +10,6 @@ ARG JB_VERSION
 ARG JSONNET_GO_VERSION
 
 COPY download.sh binaries.txt /scripts/
-RUN arch && echo "${TARGETOS} ${TARGETARCH} ${BUILDPLATFORM}"
 RUN /scripts/download.sh /tmp/downloads/jb "jb-${JB_VERSION}-${TARGETOS}-${TARGETARCH}" \
     && mv "/tmp/downloads/jb/jb-${JB_VERSION}-${TARGETOS}-${TARGETARCH}" /tmp/downloads/jb/jb
 RUN /scripts/download.sh /tmp/downloads/go-jsonnet "go-jsonnet-${JSONNET_GO_VERSION}-${TARGETOS}-${TARGETARCH}.tar.gz"
