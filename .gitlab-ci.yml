@@ -27,10 +27,12 @@ version:
   image: docker.io/bitnami/git:2.43.2
   script:
     - ci/scripts/version.sh | tee ci/reports/version.env
+    - ci/scripts/tool-versions.sh JB_VERSION JSONNET_GO_VERSION | tee ci/reports/tool-versions.env
   artifacts:
     reports:
       dotenv:
         - ci/reports/version.env
+        - ci/reports/tool-versions.env
   rules:
     - if: $CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+/
       variables:
@@ -112,7 +114,7 @@ publish:
   image: quay.io/buildah/stable:v1.34
   script:
     - ci/scripts/log-into-ci-registry.sh
-    - ci/scripts/publish.sh "jb-${JB_VERSION}" "jsonnet-go-${JSONNET_GO_VERSION}"
+    - ci/scripts/publish.sh "jb-${JB_VERSION}" "jb-${JB_VERSION_MINOR}" "jsonnet-go-${JSONNET_GO_VERSION}" "jsonnet-go-${JSONNET_GO_VERSION_MINOR}"
   needs:
     - version
     - scan-amd64
