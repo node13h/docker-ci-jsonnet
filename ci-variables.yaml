@@ -1,0 +1,38 @@
+---
+description: Machine-readable documentation of CI variables
+variables:
+  PUBLISH_IMAGE:
+    type: string
+    description: Image name (excluding tag) to use for publishing released images
+    required: true
+  CI_REGISTRY_IMAGE:
+    type: string
+    description: Image name (excluding tag and registry) to use for passing container images between jobs; auto-populated by GitLab CI
+  CI_REGISTRY:
+    type: string
+    description: Container registry address for CI_REGISTRY_IMAGE; auto-populated by GitLab CI
+    required: true
+  CI_REGISTRY_USER:
+    type: string
+    description: Username for CI_REGISTRY (if auth is required); auto-populated by GitLab CI
+    required: false
+  CI_REGISTRY_PASSWORD:
+    type: string
+    description: Password for CI_REGISTRY (if auth is required); auto-populated by GitLab CI
+    required: false
+  CI_COMMIT_TAG:
+    type: string
+    description: Enables release pipeline when set to a git tag HEAD is pointing at; auto-populated by GitLab CI
+    required: false
+  TRIVY_INSECURE:
+    type: string
+    description: Set to "true" when CI_REGISTRY does not support TLS
+    required: false
+  CONTAINERS_REGISTRIES_CONF:
+    type: file
+    description: Default location of registries.conf for Buildah; useful for registry remapping, enabling insecure mode, etc
+    required: false
+  REGISTRY_AUTH_FILE:
+    type: file
+    description: Default location of auth.json for Buildah; useful for registry auth
+    required: false

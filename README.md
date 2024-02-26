@@ -10,8 +10,6 @@
 - Make
 - Git
 
-See [DEVELOPING.md](DEVELOPING.md) for local development setup
-instructions.
 ## Tags
 
 Image is tagged with an immutable version number (see [VERSION](VERSION)) on
@@ -32,3 +30,10 @@ $ docker run -it --rm docker.io/alikov/ci-jsonnet:jsonnet-go-0.20 jsonnet --vers
 Jsonnet commandline interpreter (Go implementation) v0.20.0
 ```
 
+## GitLab CI variables
+
+See [ci-variables.yaml](ci-variables.yaml).
+
+## Developing
+
+See [DEVELOPING.md](DEVELOPING.md) for local development setup instructions.
