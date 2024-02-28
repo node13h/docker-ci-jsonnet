@@ -40,7 +40,7 @@ created earlier.
 {
     read -rp 'DockerHub username: ' dockerhub_user
     read -rsp 'DockerHub token: ' dockerhub_token
-    dockerhub_auth=$(printf '%s:%s' "$dockerhub_user", "$dockerhub_token" | base64)
+    dockerhub_auth=$(printf '%s:%s' "$dockerhub_user" "$dockerhub_token" | base64)
 
     cat <<EOF >.gitlab-ci-local-variables.yml
 ---
