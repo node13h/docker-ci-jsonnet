@@ -6,7 +6,6 @@ stages:
   - publish
 
 variables:
-  IMAGE_TAG: ${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
   TRIVY_CACHE_DIR: ci/cache/trivy
   TRIVY_NO_PROGRESS: "true"
   # https://aquasecurity.github.io/trivy/v0.49/docs/configuration/filtering/#trivyignoreyaml
@@ -26,7 +25,7 @@ version:
   stage: env
   image: docker.io/bitnami/git:2.43.2
   script:
-    - ci/scripts/version.sh | tee ci/reports/version.env
+    - ci/scripts/version.sh ci/reports/version.env
     - ci/scripts/tool-versions.sh JB_VERSION JSONNET_GO_VERSION | tee -a ci/reports/version.env
   artifacts:
     reports:
@@ -35,16 +34,8 @@ version:
   rules:
     - if: $CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+/
       variables:
-        IS_TAGGED_RELEASE: "true"
-
-check-release-version:
-  stage: lint
-  image: docker.io/busybox:1.36
-  script:
-    - ci/scripts/check-release-version.sh
-  needs: []
-  rules:
-    - if: $CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+/
+        IS_TAGGED_RELEASE: "1"
+    - when: on_success
 
 .with-trivy-cache:
   cache:
@@ -93,20 +84,24 @@ iac-check:
     TRIVY_USERNAME: $CI_REGISTRY_USER
     TRIVY_PASSWORD: $CI_REGISTRY_PASSWORD
   script:
-    - trivy image "${CI_REGISTRY_IMAGE}:${IMAGE_TAG}-${ARCH}"
-    - trivy image --severity HIGH,CRITICAL --exit-code 3 --ignore-unfixed "${CI_REGISTRY_IMAGE}:${IMAGE_TAG}-${ARCH}"
+    - trivy image "${CI_REGISTRY_IMAGE}:${VERSION_SEMVER}-${ARCH}"
+    - trivy image --severity HIGH,CRITICAL --exit-code 3 --ignore-unfixed "${CI_REGISTRY_IMAGE}:${VERSION_SEMVER}-${ARCH}"
 
 scan-amd64:
   extends: .scan
   variables:
     ARCH: amd64
-  needs: ["build-amd64"]
+  needs:
+    - version
+    - build-amd64
 
 scan-arm64:
   extends: .scan
   variables:
     ARCH: arm64
-  needs: ["build-arm64"]
+  needs:
+    - version
+    - build-arm64
 
 publish:
   stage: publish

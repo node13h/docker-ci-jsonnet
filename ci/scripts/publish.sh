@@ -15,21 +15,15 @@ buildah_manifest_push () {
     >&2 printf 'Pushed %s\n' "$2"
 }
 
-if [ -n "${IS_TAGGED_RELEASE:-}" ]; then
-    PUBLISH_IMAGE_TAG=$(cat VERSION)
-else
-    PUBLISH_IMAGE_TAG="$IMAGE_TAG"
-fi
-
-manifest="${PUBLISH_IMAGE}:${PUBLISH_IMAGE_TAG}"
+manifest="${PUBLISH_IMAGE}:${VERSION_SEMVER}"
 
 buildah_cmd manifest create "$manifest"
 
 for arch in amd64 arm64; do
-    buildah_cmd manifest add "$manifest" "${CI_REGISTRY_IMAGE}:${IMAGE_TAG}-${arch}"
+    buildah_cmd manifest add "$manifest" "${CI_REGISTRY_IMAGE}:${VERSION_SEMVER}-${arch}"
 done
 
-buildah_manifest_push "$manifest" "${PUBLISH_IMAGE}:${PUBLISH_IMAGE_TAG}"
+buildah_manifest_push "$manifest" "${PUBLISH_IMAGE}:${VERSION_SEMVER}"
 
 if [ -n "${IS_LATEST_RELEASE:-}" ]; then
     buildah_manifest_push "$manifest" "${PUBLISH_IMAGE}:latest"

@@ -17,11 +17,11 @@ buildah --storage-driver=vfs build \
         --build-arg JSONNET_GO_VERSION="$JSONNET_GO_VERSION" \
         --build-arg TARGETARCH="$ARCH" \
         --arch "$ARCH" \
-        -t "${CI_REGISTRY_IMAGE}:${IMAGE_TAG}-${ARCH}" \
+        -t "${CI_REGISTRY_IMAGE}:${VERSION_SEMVER}-${ARCH}" \
         .
 
 buildah --storage-driver=vfs inspect \
-        "${CI_REGISTRY_IMAGE}:${IMAGE_TAG}-${ARCH}"
+        "${CI_REGISTRY_IMAGE}:${VERSION_SEMVER}-${ARCH}"
 
 buildah --storage-driver=vfs push \
-        "${CI_REGISTRY_IMAGE}:${IMAGE_TAG}-${ARCH}"
+        "${CI_REGISTRY_IMAGE}:${VERSION_SEMVER}-${ARCH}"

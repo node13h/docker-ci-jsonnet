@@ -72,10 +72,25 @@ EOF
 ## Running builds locally
 
 Run `make pipeline` to run the pipeline defined in [.gitlab-ci.yml](.gitlab-ci.yml).
-Run `make publish-pipeline` to run the pipeline including the manual `publish` job.
+This will build and push a pre-release image to the local registry specified
+in `CI_REGISTRY`.
+
+`make pipeline-with-publish` will additionally run the `publish` CI job to push
+the pre-release image as `PUBLISH_IMAGE`.
 
 See [Makefile](Makefile) for more details. Override `CONTAINER_NETWORK` if the
 default `localci` is different from the network name created earlier.
+
+## Releasing
+
+To build and publish a tagged image release
+
+- Create an annotated (to track the release date) Git tag using `vX.Y.Z` format.
+  `X.Y.Z` must match the version in [VERSION](VERSION).
+- Ensure the Git working tree is clean.
+- Run `make tag-pipeline`. This will build and push the image as`PUBLISH_IMAGE`
+  with the `X.Y.Z` tag.
+- Increment the version number in [VERSION](VERSION) and commit the change.
 
 ## Updating tool versions
 
